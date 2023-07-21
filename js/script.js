@@ -1,40 +1,52 @@
-//This is the master list array of all Pokemon.
-let pokemonList = [
-    { 
-        name: 'Charmander', 
-        height: 0.6, 
-        types: 'fire' 
-    },
-    { 
-        name: 'Tropius', 
-        height: 2, 
-        types: ['grass', ' flying'] 
-    },
-    { 
-        name: 'Charizard', 
-        height: 1.7, 
-        types: ['fire', ' flying'] 
-    },
-    { 
-        name: 'Spearow', 
-        height: 0.3, 
-        types: ['flying', ' normal'] 
-    }
-];
+//Start of IIFE holder
+let pokemonRepository = (function() {
 
-//A loop to display all list items using the "forEach Loop" format.
-pokemonList.forEach(function(pokemon) {
-    document.write(pokemon.name + ' / ' + pokemon.height + ' / ' + pokemon.types + '<br><br>');
-});
+    let pokemonList = [
+        { 
+            name: 'Charmander', 
+            height: 0.6, 
+            types: 'fire' 
+        },
+        { 
+            name: 'Tropius', 
+            height: 2, 
+            types: ['grass', ' flying'] 
+        },
+        { 
+            name: 'Charizard', 
+            height: 1.7, 
+            types: ['fire', ' flying'] 
+        },
+        { 
+            name: 'Spearow', 
+            height: 0.3, 
+            types: ['flying', ' normal'] 
+        }
+    ];
+    
+        function add(pokemon) {
+            pokemonList.push(pokemon);
+        }
 
+        function getAll() {
+            return pokemonList;
+        }
 
-/* THIS IS THE PREVIOUS "FOR LOOP" FORMAT, INCLUDING 'WOW THAT'S BIG'.
+        return {
+            add: add,
+            getAll: getAll
+        };
+    })();
 
-for (let i = 0; i < pokemonList.length; i++) 
-    if (pokemonList[i].height >= 1.8) {
-    document.write(pokemonList[i].name + ' / ', pokemonList[i].height + ' / ', pokemonList[i].types + ' ...Wow, that\'s big!' + '<br><br>'); 
-    } 
-    else {document.write(pokemonList[i].name + ' / ', pokemonList[i].height + ' / ', pokemonList[i].types + '<br><br>')
-}
-*/
+        console.log(pokemonRepository.getAll());
+        pokemonRepository.add({ 
+            name: 'Ivysaur',
+            height: 3,
+            types: ['grass', ' poison']
+        });
 
+    //A loop to display all list items using the "forEach Loop" format, used prior to containing the above function in an IIFE.
+    /*pokemonRepository.forEach(function(pokemon) {
+        document.write(pokemon.name + ' / ' + pokemon.height + ' / ' + pokemon.types + '<br><br>');
+    });
+    */
