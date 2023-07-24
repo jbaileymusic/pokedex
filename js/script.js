@@ -1,6 +1,7 @@
-//Start of IIFE holder
+//Start of IIFE
 let pokemonRepository = (function() {
 
+    //Main list of Pokemon with stats
     let pokemonList = [
         { 
             name: 'Charmander', 
@@ -32,21 +33,42 @@ let pokemonRepository = (function() {
             return pokemonList;
         }
 
+        //Creates the list of Pokemon buttons
+        function addListItem(pokemon) {
+            let fullList = document.querySelector('.pokemon-list');
+            let listItem = document.createElement('li');
+            let button = document.createElement('button');
+            button.classList.add('button-class');
+            button.innerText = pokemon.name;
+            listItem.appendChild(button);
+            fullList.appendChild(listItem);
+            button.addEventListener ('click', function (showDetails) {
+                console.log(showDetails);
+            }
+            )};
+
+        function showDetails (pokemon) {
+            console.log(pokemon);
+        }
+
         return {
             add: add,
-            getAll: getAll
+            getAll: getAll,
+            addListItem: addListItem
         };
-    })();
+})();
 
-        console.log(pokemonRepository.getAll());
-        pokemonRepository.add({ 
-            name: 'Ivysaur',
-            height: 3,
-            types: ['grass', ' poison']
-        });
 
-    //A loop to display all list items using the "forEach Loop" format, used prior to containing the above function in an IIFE.
-    /*pokemonRepository.forEach(function(pokemon) {
-        document.write(pokemon.name + ' / ' + pokemon.height + ' / ' + pokemon.types + '<br><br>');
-    });
-    */
+console.log(pokemonRepository.getAll());
+pokemonRepository.add({ 
+    name: 'Ivysaur',
+    height: 3,
+    types: ['grass', ' poison']
+});
+
+    //A loop to display all list items using the "forEach Loop" format.
+pokemonRepository.getAll().forEach(function(pokemon) {
+    
+    pokemonRepository.addListItem(pokemon);
+});
+    
