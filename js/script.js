@@ -1,32 +1,20 @@
-//Start of IIFE
 let pokemonRepository = (function() {
 
-    //Main list of Pokemon with stats
-    let pokemonList = [
-        { 
-            name: 'Charmander', 
-            height: 0.6, 
-            types: 'fire' 
-        },
-        { 
-            name: 'Tropius', 
-            height: 2, 
-            types: ['grass', ' flying'] 
-        },
-        { 
-            name: 'Charizard', 
-            height: 1.7, 
-            types: ['fire', ' flying'] 
-        },
-        { 
-            name: 'Spearow', 
-            height: 0.3, 
-            types: ['flying', ' normal'] 
-        }
-    ];
+        let pokemonList =[];
+
+    // Link to access the POKEAPI database
+        let apiUrl = 'https://pokeapi.co/api/v2/pokemon';
     
         function add(pokemon) {
-            pokemonList.push(pokemon);
+            if (
+                typeof pokemon === "object" &&
+                "name" in pokemon &&
+                "detailsUrl" in pokemon
+            ) {
+                pokemonList.push(pokemon);
+            } else {
+                console.log("This Pokemon is not correct!");
+            }
         }
 
         function getAll() {
@@ -38,26 +26,63 @@ let pokemonRepository = (function() {
             let fullList = document.querySelector('.pokemon-list');
             let listItem = document.createElement('li');
             let button = document.createElement('button');
-            button.classList.add('button-class');
+            button.classList.add('button-class')
             button.innerText = pokemon.name;
             listItem.appendChild(button);
             fullList.appendChild(listItem);
             button.addEventListener ('click', function (showDetails) {
                 console.log(showDetails);
             }
-            )};
+        )};
 
         function showDetails (pokemon) {
+            loadDetails(pokemon).then(function () {
             console.log(pokemon);
+            });
         }
 
-        return {
+        function loadList() {
+            return fetch(apiUrl).then(function (response) {
+              return response.json();
+            }).then(function (json) {
+              json.results.forEach(function (item) {
+                let pokemon = {
+                  name: item.name,
+                  detailsUrl: item.url
+                };
+                add(pokemon);
+              });
+            }).catch(function (e) {
+              console.error(e);
+            })
+        }
+
+        function loadDetails(item) {
+            let url = item.detailsUrl;
+            return fetch(url).then(function (response) {
+                return response.json();
+            }).then(function (details) {
+                //Item details
+                item.imageUrl = details.sprites.front_default;
+                item.height = details.height;
+                item.types = details.types;
+            }).catch(function (e) {
+                console.error(e);
+            });
+            }
+        
+        
+          return {
             add: add,
             getAll: getAll,
-            addListItem: addListItem
-        };
+            loadList: loadList,
+            loadDetails: loadDetails,
+            addListItem: addListItem,
+            showDetails: showDetails
+          };
 })();
 
+/* Former code for adding a pokemon to the list: */
 
 console.log(pokemonRepository.getAll());
 pokemonRepository.add({ 
@@ -66,9 +91,11 @@ pokemonRepository.add({
     types: ['grass', ' poison']
 });
 
-    //A loop to display all list items using the "forEach Loop" format.
-pokemonRepository.getAll().forEach(function(pokemon) {
-    
-    pokemonRepository.addListItem(pokemon);
+// LOADS THE DATA:
+
+pokemonRepository.loadList().then(function() {
+    pokemonRepository.getAll().forEach(function(pokemon) {
+        pokemonRepository.addListItem(pokemon);
+    });
 });
     
