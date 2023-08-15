@@ -35,6 +35,14 @@ h1 {
     margin-right: 35px;
 }
 
+.button-custom {
+  background-color: rgb(65, 65, 194);
+  text-transform: capitalize;
+  font-weight: 700;
+  border-color: silver;
+  border-width: 3px;
+}
+
 /* Modals and Dialogs*/
 
 #modal-container {
