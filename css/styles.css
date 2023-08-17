@@ -1,5 +1,13 @@
 
 
+.color-green {
+    color: green
+}
+
+.italics {
+  font-style: italic;
+}
+
 h1 {
     color: darkslategray;
     text-align: center;
@@ -12,12 +20,6 @@ h1 {
     text-align: center;
     font-size: 20px;
     font-weight: 600;
-
-/*  Below is a possible method for 2 column listing.       
-    height: 700px;
-    -webkit-column-count: 2;
-       -moz-column-count: 2;
-            column-count: 2; */
 }
 
 .button-class {
@@ -109,4 +111,8 @@ h1 {
     height: 150px;
     margin-left: 30px;
     margin-top: -20px
+  }
+
+  .array-item {
+    text-transform: capitalize;
   }
