@@ -28,7 +28,7 @@ let pokemonRepository = (function() {
             let fullList = document.querySelector('.pokemon-list');
             let listItem = document.createElement('li');
             let button = document.createElement('button');
-            listItem.classList.add('list-group-item');
+            listItem.classList.add('list-group-item', 'row', 'bg-transparent', 'border-0');
             button.classList.add('btn','btn-primary','btn-lg','button-custom');
             button.innerText = pokemon.name;
             button.setAttribute("data-target", "#modal-container"); 
@@ -99,6 +99,7 @@ let pokemonRepository = (function() {
                 let weightElement = $('<p>' + 'WEIGHT : ' + pokemon.weight + '</p>');
                 let typesElement = $('<p>' + 'TYPES : ' + pokemon.types.join(', ') + '</p>');
                 let abilitiesElement = $('<p>' + 'ABILITIES : ' + pokemon.abilities.join(', ') + '</p>');
+
 
                 typesElement.addClass('array-item');
                 abilitiesElement.addClass('array-item');

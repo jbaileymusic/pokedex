@@ -76,13 +76,14 @@ h1 {
     margin: auto;
     display: inline-block;
     box-sizing: border-box;
-    background: #f2f2fa;
+    background: none;
     padding: 20px;
-    width: 100%;
+    width: 700px;
+    height: 700px;
     max-width: 700px;
     text-align: center;
     border-radius: 10px;
-    border: solid
+    border: none
   }
   
   .modal-close {
@@ -107,8 +108,8 @@ h1 {
   }
 
   .modal-img {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     margin-left: 30px;
     margin-top: -20px
   }
@@ -116,3 +117,17 @@ h1 {
   .array-item {
     text-transform: capitalize;
   }
+
+
+
+  .modal-dialog {
+    text-align: center;
+  }
+
+  .modal-content {
+    background-color: rgb(201, 200, 228);
+    border-width: 5px;
+    border-color: rgb(6, 6, 165);
+  }
+
+  
